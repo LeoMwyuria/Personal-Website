@@ -5,6 +5,7 @@ import retroSound from './music/retroMenu-.mp3'
 import eccomerce from './assets/Ecommerce.png'
 import glamoura from './assets/Glamoura.png'
 import recruiter from './assets/Recruiter.png'
+import certificate from './assets/ლევან ჩარგეიშვილი_Certificate.pdf'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
@@ -380,9 +381,17 @@ const App = () => {
         <p className="text-xl">Computer Science | 2023-2027</p>
       </div>
       <div className="education-card">
-        <h3 className="text-3xl mb-4">Re: Educate – Certificate Link</h3>
-        <p className="text-xl">Web Development | 2023-2024 (Finished)</p>
-      </div>
+  <h3 className="text-3xl mb-4">Re: Educate</h3>
+  <p className="text-xl">Web Development | 2023-2024 (Finished)</p>
+  <a 
+    href={certificate}
+    download
+    className="inline-block mt-4 px-6 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition-all text-white"
+    onMouseEnter={playHoverSound}
+  >
+    Click here to download certificate
+  </a>
+</div>
     </div>
   </div>
 </section>
