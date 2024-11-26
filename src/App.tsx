@@ -29,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 400) {
         setShowScrollTop(true)
       } else {
         setShowScrollTop(false)
@@ -245,7 +245,7 @@ const App = () => {
           </button>
         </div>
       ) : (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col w-full">
           <section 
   className="min-h-screen flex items-center justify-center"
   style={{
@@ -274,7 +274,6 @@ const App = () => {
       style={{
         position: 'fixed',
         top: '80px',
-        left: '20px',
         backgroundColor: 'rgba(147, 51, 234, 0.8)',
         padding: '10px 20px',
         borderRadius: '0px',
@@ -289,14 +288,14 @@ const App = () => {
   )}
 </section>
 
-<section id="about" ref={aboutRef} className="min-h-screen flex items-center justify-center hidden-section mx-4">
-      <div className="text-white text-center max-w-6xl w-full px-8 content">
-        <h2 className="text-5xl mb-12 text-purple-400">About Me</h2>
-        <p className="text-2xl">Web Developer based in Tbilisi, Georgia</p>
-        <h2 className="text-5xl mb-12 text-purple-400 mt-7">Contact</h2>
-        <p className="text-2xl mt-8">Contact: +995 592 44 90 49 | chargeishvililevani@gmail.com</p>
-      </div>
-    </section>
+<section id="about" ref={aboutRef} className="min-h-screen flex items-center justify-center hidden-section mx-2 sm:mx-4">
+  <div className="text-white text-center max-w-6xl w-full px-4 sm:px-8 content">
+    <h2 className="text-4xl sm:text-5xl mb-8 sm:mb-12 text-purple-400">About Me</h2>
+    <p className="text-lg sm:text-2xl">Web Developer based in Tbilisi, Georgia</p>
+    <h2 className="text-4xl sm:text-5xl mb-8 sm:mb-12 text-purple-400 mt-7">Contact</h2>
+    <p className="text-lg sm:text-2xl mt-8 break-words">Contact: +995 592 44 90 49 | chargeishvililevani@gmail.com</p>
+  </div>
+</section>
 
     <section id="projects" ref={projectsRef} className="min-h-screen flex items-center justify-center hidden-section py-20">
   <div className="text-white max-w-7xl w-full px-8">
@@ -368,6 +367,7 @@ const App = () => {
         </div>
       </div>
     </div>
+    <br />
     <br />
     <br />
     <br />

@@ -26,7 +26,7 @@ const Header = ({ toggleMute, isMuted }: HeaderProps) => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 flex justify-between p-5 bg-black bg-opacity-45 z-50">
+    <header className="fixed top-0 left-0 right-0 flex justify-between p-5 bg-black bg-opacity-45 z-50 w-full max-w-[100vw]">
       <div className="text-white font-bold text-xl md:text-2xl">Levan Chargeishvili</div>
       
       {/* Mobile Menu Button */}
@@ -40,7 +40,7 @@ const Header = ({ toggleMute, isMuted }: HeaderProps) => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`${isMenuOpen ? 'flex' : 'hidden'} md:hidden absolute top-full left-0 right-0 flex-col bg-black bg-opacity-90 py-4`}>
+      <div className={`${isMenuOpen ? 'flex' : 'hidden'} md:hidden absolute top-full left-0 right-0 flex-col bg-black bg-opacity-90 py-4 max-h-[80vh] overflow-y-auto`}>
         <div 
           onMouseEnter={playHoverSound}
           onClick={() => scrollToSection('about')} 
