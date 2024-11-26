@@ -101,7 +101,6 @@ const App = () => {
           start: 'top center',
           toggleActions: 'play none none reverse'
         },
-        y: 50,
         duration: 0.8,
         stagger: 0.3
       })
@@ -369,6 +368,9 @@ const App = () => {
         </div>
       </div>
     </div>
+    <br />
+    <br />
+    <br />
   </div>
 </section>
 
