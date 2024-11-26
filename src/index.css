@@ -132,3 +132,187 @@ button:active {
   scrollbar-width: thin;
   scrollbar-color: #9333ea #1a1a1a;
 }
+.slide-in-right {
+  animation: slideInRight 1s ease-out forwards;
+  opacity: 0;
+}
+
+.slide-in-left {
+  animation: slideInLeft 1s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Add smooth scrolling to the whole page */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Optional: Add a fade-in animation for the content */
+.fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.project-card {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.project-card:hover {
+  transform: scale(1.02) rotateY(5deg);
+  box-shadow: -10px 10px 20px rgba(147, 51, 234, 0.2);
+}
+
+.project-card img {
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.05) rotateY(-5deg);
+}
+
+/* Ensure images maintain aspect ratio */
+img {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+}
+/* Mobile-first responsive styles */
+@media screen and (max-width: 768px) {
+  .welcome-text {
+    font-size: 1.8rem !important;
+    padding: 0 1rem;
+  }
+
+  .text-5xl {
+    font-size: 2.5rem !important;
+  }
+
+  .text-3xl {
+    font-size: 1.8rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1.2rem !important;
+  }
+
+  .text-xl {
+    font-size: 1rem !important;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .hidden-section {
+    margin: 1rem !important;
+    padding: 1rem !important;
+  }
+
+  .project-card {
+    padding: 1rem !important;
+  }
+
+  .space-y-16 {
+    margin-top: 2rem;
+  }
+
+  .px-8 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .gap-16 {
+    gap: 2rem !important;
+  }
+
+  .mb-16 {
+    margin-bottom: 2rem !important;
+  }
+
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .skill-category {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Tablet styles */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .welcome-text {
+    font-size: 2rem !important;
+  }
+
+  .text-5xl {
+    font-size: 3rem !important;
+  }
+
+  .grid {
+    gap: 2rem !important;
+  }
+
+  .hidden-section {
+    margin: 1.5rem !important;
+  }
+}
+
+/* Ensure images stay responsive */
+.project-card img {
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Improve touch targets on mobile */
+@media (hover: none) {
+  .project-card:hover {
+    transform: none;
+  }
+
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 24px;
+  }
+}
