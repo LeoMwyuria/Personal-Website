@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
   background-image: url('./assets/katanaZero.png');
   background-size: cover;
@@ -12,6 +10,7 @@ body {
   font-family: 'Orbitron', sans-serif;
   color: white;
   position: relative;
+  overflow-x: hidden;
 }
 
 @keyframes rain {
@@ -31,7 +30,6 @@ body {
   animation: rain 0.7s linear infinite;
   opacity: 0.5;
 }
-
 
 .rain:nth-child(1) { left: 10%; animation-delay: 0.2s; }
 .rain:nth-child(2) { left: 20%; animation-delay: 0.5s; }
@@ -82,6 +80,7 @@ button:active {
   transform: translate(4px, 4px);
   box-shadow: none;
 }
+
 .hidden-section {
   opacity: 0;
   transform: translateY(20px);
@@ -97,6 +96,7 @@ button:active {
   opacity: 1;
   transform: translateY(0);
 }
+
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -111,6 +111,7 @@ button:active {
 .fadeOut {
   animation: fadeOut 1s ease-out forwards;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -132,6 +133,7 @@ button:active {
   scrollbar-width: thin;
   scrollbar-color: #9333ea #1a1a1a;
 }
+
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
   opacity: 0;
@@ -164,7 +166,6 @@ button:active {
   }
 }
 
-/* Add smooth scrolling to the whole page */
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
@@ -175,46 +176,67 @@ section {
   scroll-snap-stop: always;
 }
 
-/* Optional: Add a fade-in animation for the content */
 .fade-in {
   animation: fadeIn 1s ease-out forwards;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@media screen and (min-width: 1025px) {
+  .project-card {
+    transform-style: preserve-3d;
+    perspective: 2000px;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .project-card:hover {
+    transform: translateZ(60px) rotateX(10deg) rotateY(-15deg);
+    box-shadow: 
+      25px 25px 50px rgba(147, 51, 234, 0.4),
+      -25px -25px 50px rgba(147, 51, 234, 0.1);
+  }
+
+  .project-card:hover img {
+    transform: translateZ(40px) scale(1.1);
+    filter: brightness(1.2) contrast(1.1);
   }
 }
-.project-card {
-  transition: transform 0.5s ease;
-  transform-style: preserve-3d;
-  perspective: 1000px;
+
+/* Tablet animations */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .project-card {
+    transform-style: preserve-3d;
+    perspective: 1500px;
+    transition: all 0.5s ease;
+  }
+
+  .project-card:hover {
+    transform: translateZ(30px) rotateX(5deg) rotateY(-8deg);
+    box-shadow: 
+      15px 15px 30px rgba(147, 51, 234, 0.3),
+      -15px -15px 30px rgba(147, 51, 234, 0.1);
+  }
+
+  .project-card:hover img {
+    transform: translateZ(20px) scale(1.05);
+  }
 }
 
-.project-card:hover {
-  transform: scale(1.02) rotateY(5deg);
-  box-shadow: -10px 10px 20px rgba(147, 51, 234, 0.2);
-}
+/* Mobile optimizations */
+@media screen and (max-width: 768px) {
+  .project-card {
+    transition: all 0.4s ease;
+  }
 
-.project-card img {
-  transition: transform 0.5s ease;
+  .project-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px rgba(147, 51, 234, 0.2);
+  }
 }
-
-.project-card:hover img {
-  transform: scale(1.05) rotateY(-5deg);
-}
-
-/* Ensure images maintain aspect ratio */
 img {
   object-fit: contain;
   max-width: 100%;
   height: auto;
 }
+
 /* Mobile-first responsive styles */
 @media screen and (max-width: 768px) {
   .welcome-text {
@@ -295,13 +317,6 @@ img {
   .hidden-section {
     margin: 1.5rem !important;
   }
-}
-
-/* Ensure images stay responsive */
-.project-card img {
-  max-height: 300px;
-  width: 100%;
-  object-fit: cover;
 }
 
 /* Improve touch targets on mobile */

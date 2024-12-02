@@ -8,6 +8,8 @@ import recruiter from './assets/Recruiter.png'
 import certificate from './assets/ლევან ჩარგეიშვილი_Certificate.pdf'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+
 gsap.registerPlugin(ScrollTrigger)
 const App = () => {
   const [showContent, setShowContent] = useState(false)
@@ -73,79 +75,133 @@ const App = () => {
   }
   useEffect(() => {
     if (showContent) {
-      // Welcome text animation
-      gsap.from('.welcome-text', {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power4.out'
-      })
-  
-      // About section animation
-      gsap.from('#about .content', {
-        scrollTrigger: {
-          trigger: '#about',
-          start: 'top center',
-          toggleActions: 'play none none reverse'
-        },
-        x: -100,
-        opacity: 0,
+      const tl = gsap.timeline({
+        defaults: {
+          ease: 'power4.out',
+        }
+      });
+
+      tl.from('.welcome-text', {
         duration: 1,
-        stagger: 0.2
-      })
-  
-      // Projects section animation
-      gsap.from('#projects .project-card', {
-        scrollTrigger: {
-          trigger: '#projects',
-          start: 'top center',
-          toggleActions: 'play none none reverse'
-        },
-        duration: 0.8,
-        stagger: 0.3
-      })
-  
-      // Skills section animation
-      gsap.from('#contact .skill-category', {
-        scrollTrigger: {
-          trigger: '#contact',
-          start: 'top center',
-          toggleActions: 'play none none reverse'
-        },
-        scale: 0.8,
+        y: 30,
         opacity: 0,
-        duration: 0.5,
-        stagger: 0.2
-      })
-    }
-    gsap.from('#education .education-card', {
-      scrollTrigger: {
+        ease: "power2.out"
+      });
+      // About section - clean, modern reveal
+      ScrollTrigger.create({
+        trigger: '#about',
+        start: 'top center+=100',
+        onEnter: () => {
+          gsap.from('#about .content', {
+            y: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.out",
+            clearProps: "all"
+          });
+        },
+        once: true
+      });
+
+      // Education - smooth scale reveal
+      ScrollTrigger.create({
         trigger: '#education',
-        start: 'top center',
-        toggleActions: 'play none none reverse'
-      },
-      x: 100,
-      opacity: 0,
+        start: 'top center+=100',
+        onEnter: () => {
+          gsap.from('#education h2', {
+            y: 30,
+            opacity: 0,
+            duration: 0.8
+          });
+          gsap.from('.education-card', {
+            scale: 0.8,
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+          });
+        },
+        once: true
+      });
+
+      // Keeping your favorite Skills section animation
+      ScrollTrigger.create({
+        trigger: '#contact',
+        start: 'top center+=100',
+        onEnter: () => {
+          gsap.from('#contact h2', {
+            scale: 2,
+            opacity: 0,
+            duration: 0.8
+          });
+          gsap.from('.skill-category', {
+            opacity: 0,
+            scale: 0.5,
+            rotation: -15,
+            y: 100,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'back.out(1.7)'
+          });
+          gsap.from('.skill-category li', {
+            opacity: 0,
+            x: -50,
+            duration: 0.5,
+            stagger: 0.05,
+            delay: 0.5
+          });
+        },
+        once: true
+      });
+
+      const isMobile = window.innerWidth <= 768;
+
+if (isMobile) {
+  ScrollTrigger.batch('#projects .project-card', {
+    start: 'top bottom-=100px',
+    onEnter: batch => gsap.to(batch, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.2,
+      ease: "power2.out"
+    }),
+    once: true
+  });
+
+  gsap.set('#projects .project-card', {
+    y: 50,
+    opacity: 0
+  });
+} else {
+  ScrollTrigger.batch('#projects .project-card', {
+    start: 'top bottom-=100px',
+    onEnter: batch => gsap.to(batch, {
+      xPercent: 0,
+      opacity: 1,
+      rotationZ: 0,
+      stagger: 0.2,
       duration: 0.8,
-      stagger: 0.3
-    })
-    gsap.to('.project-card', {
-      scrollTrigger: {
-        trigger: '.project-card',
-        start: 'top center',
-        scrub: 1
-      },
-      rotationY: 10,
-      transformPerspective: 1000
-    })
-    gsap.to('.background', {
-      scrollTrigger: {
-        scrub: 1
-      },
-      y: (_, target) => -ScrollTrigger.maxScroll(window) * target.dataset.speed,
-      ease: 'none'
-    })
-  }, [showContent])
+      ease: "power4.out"
+    }),
+    once: true
+  });
+
+  gsap.set('#projects .project-card', {
+    xPercent: 100,
+    opacity: 0,
+    rotationZ: 10
+  });
+}
+
+
+
+      return () => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      };
+    }
+  }, [showContent]);
   
 
   useEffect(() => {
@@ -153,22 +209,37 @@ const App = () => {
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-section')
+            entry.target.classList.add('fade-in-section');
           }
-        })
+        });
       },
-      { threshold: 0.3 }
-    )
-
-    const refs = [aboutRef, projectsRef, educationRef, contactRef]
+      { 
+        threshold: 0.3,
+        rootMargin: '50px'
+      }
+    );
+  
+    const refs = [aboutRef, projectsRef, educationRef, contactRef];
     refs.forEach(ref => {
       if (ref.current) {
-        observer.observe(ref.current)
+        observer.observe(ref.current);
       }
-    })
+    });
+  
+    return () => observer.disconnect();
+  }, []);
 
-    return () => observer.disconnect()
-  }, [])
+  useEffect(() => {
+    const handleScroll = () => {
+      const shouldShow = window.scrollY > 400;
+      if (shouldShow !== showScrollTop) {
+        setShowScrollTop(shouldShow);
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [showScrollTop]);
 
   return (
     <>
@@ -288,8 +359,8 @@ const App = () => {
   )}
 </section>
 
-<section id="about" ref={aboutRef} className="min-h-screen flex items-center justify-center hidden-section mx-2 sm:mx-4">
-  <div className="text-white text-center max-w-6xl w-full px-4 sm:px-8 content">
+<section id="about" ref={aboutRef} className="min-h-screen flex items-center justify-center hidden-section">
+  <div className="text-white text-center max-w-7xl w-full px-8 content">
     <h2 className="text-4xl sm:text-5xl mb-8 sm:mb-12 text-purple-400">About Me</h2>
     <p className="text-lg sm:text-2xl">Web Developer based in Tbilisi, Georgia</p>
     <h2 className="text-4xl sm:text-5xl mb-8 sm:mb-12 text-purple-400 mt-7">Contact</h2>
