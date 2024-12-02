@@ -368,11 +368,33 @@ if (isMobile) {
   </div>
 </section>
 
-    <section id="projects" ref={projectsRef} className="min-h-screen flex items-center justify-center hidden-section py-20">
+<section id="projects" ref={projectsRef} className="min-h-screen flex items-center justify-center hidden-section py-20">
   <div className="text-white max-w-7xl w-full px-8">
     <h2 className="text-5xl mb-16 text-purple-400 text-center">Projects</h2>
     <div className="flex flex-col gap-16">
-      <div className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg hover:bg-purple-900/50 transition-all">
+      {/* Ecommerce Project */}
+      <div 
+        className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
+        style={{
+          perspective: "1000px",
+          transformStyle: "preserve-3d"
+        }}
+        onMouseMove={(e) => {
+          const card = e.currentTarget;
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 20;
+          const rotateY = (centerX - x) / 20;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        }}
+      >
         <div className="w-full md:w-1/2">
           <img 
             src={eccomerce} 
@@ -394,7 +416,29 @@ if (isMobile) {
         </div>
       </div>
 
-      <div className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg hover:bg-purple-900/50 transition-all">
+      {/* Recruiter Project */}
+      <div 
+        className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
+        style={{
+          perspective: "1000px",
+          transformStyle: "preserve-3d"
+        }}
+        onMouseMove={(e) => {
+          const card = e.currentTarget;
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 20;
+          const rotateY = (centerX - x) / 20;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        }}
+      >
         <div className="w-full md:w-1/2">
           <img 
             src={recruiter} 
@@ -416,7 +460,29 @@ if (isMobile) {
         </div>
       </div>
 
-      <div className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg hover:bg-purple-900/50 transition-all">
+      {/* Glamoura Project */}
+      <div 
+        className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
+        style={{
+          perspective: "1000px",
+          transformStyle: "preserve-3d"
+        }}
+        onMouseMove={(e) => {
+          const card = e.currentTarget;
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 20;
+          const rotateY = (centerX - x) / 20;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        }}
+      >
         <div className="w-full md:w-1/2">
           <img 
             src={glamoura} 
@@ -438,10 +504,7 @@ if (isMobile) {
         </div>
       </div>
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
+    <br /><br /><br />
   </div>
 </section>
 
