@@ -547,10 +547,10 @@ if (isMobile) {
             <h3 className="text-3xl mb-6 text-purple-300">Frameworks</h3>
             <ul className="list-disc list-inside text-xl space-y-2">
               <li>React.js (Advanced)</li>
-              <li>Next.js (Intermediate)</li>
-              <li>Express.js (Basic)</li>
-              <li>Node.js (Basic)</li>
-              <li>Nest.js (Basic)</li>
+              <li>Next.js (Advanced)</li>
+              <li>Express.js (Intermediate)</li>
+              <li>Node.js (Intermediate)</li>
+              <li>Nest.js (Intermediate)</li>
             </ul>
           </div>
           <div className="skill-category">
