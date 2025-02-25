@@ -8,7 +8,7 @@ import recruiter from './assets/Recruiter.png'
 import certificate from './assets/ლევან ჩარგეიშვილი_Certificate.pdf'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
+import photogallery from './assets/photogallery.png'
 
 gsap.registerPlugin(ScrollTrigger)
 const App = () => {
@@ -373,6 +373,48 @@ if (isMobile) {
     <h2 className="text-5xl mb-16 text-purple-400 text-center">Projects</h2>
     <div className="flex flex-col gap-16">
       {/* Ecommerce Project */}
+      <div 
+  className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
+  style={{
+    perspective: "1000px",
+    transformStyle: "preserve-3d"
+  }}
+  onMouseMove={(e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  }}
+>
+  <div className="w-full md:w-1/2">
+    <img 
+      src={photogallery} 
+      alt="Photo Gallery Website" 
+      className="rounded-lg w-full shadow-lg" 
+    />
+  </div>
+  <div className="w-full md:w-1/2 text-left">
+    <h3 className="text-3xl mb-4">Photo Gallery Website</h3>
+    <p className="text-xl mb-6">Built a dynamic photo gallery platform using React, TypeScript, and the Unsplash API. Features include infinite scroll functionality, real-time search with history tracking, responsive image grid layout, and an optimized caching system for improved performance.</p>
+    <a 
+      href="https://sweeft-react-project.vercel.app/" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="inline-block px-6 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition-all"
+    >
+      View Project
+    </a>
+  </div>
+</div>
       <div 
         className="project-card flex flex-col md:flex-row items-center gap-8 p-8 bg-purple-900/30 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
         style={{
